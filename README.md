@@ -1,2 +1,2 @@
-# A.I assistant tenative 
+# TuffyAide the AI Assistant
 CPSC 362 PROJECT

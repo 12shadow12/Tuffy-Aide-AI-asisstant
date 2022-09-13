@@ -1,1 +1,1 @@
-print("PINGOGOGOaOGaOGaOOGGOOGOG.")
+print("Hello World!")

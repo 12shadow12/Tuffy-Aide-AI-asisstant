@@ -1,7 +1,7 @@
 import pyttsx3
 import speech_recognition as sr
 import weather
-import jokes
+#import jokes
 
 
 def say(audio: str) -> None:

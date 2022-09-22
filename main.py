@@ -1,7 +1,7 @@
 import pyttsx3
 import speech_recognition as sr
 import weather
-#import jokes
+import greetings
 
 
 def say(audio: str) -> None:
@@ -10,13 +10,13 @@ def say(audio: str) -> None:
     voices = tts.getProperty('voices')
 
     tts.setProperty('voice', voices[1].id)
-    tts.setProperty('rate', 85)
+    tts.setProperty('rate', 140)
 
     tts.say(audio)
     tts.runAndWait()
 
 
-def listenForCommand() -> str:
+def command() -> str:
 
     recognizer = sr.Recognizer()
     command = None
@@ -24,7 +24,7 @@ def listenForCommand() -> str:
     with sr.Microphone() as source:
 
         recognizer.pause_threshold = .6
-        audio = recognizer.listen(source)
+        audio = recognizer.listen(source, 5)
 
         try:
             command = recognizer.recognize_google(audio, language='en')
@@ -36,14 +36,28 @@ def listenForCommand() -> str:
 
 
 def greet():
-    pass
+    say(greetings.greet)
 
 
-city = "fullerton"
-w = weather.Weather().getWeather(city)
-desc = w["desc"]
-temp = w["temp"]
-high = w["high"]
-low = w["low"]
+def listenForCommand():
+    #greet()
+    say("How can i help you?")
 
-print(f'The current weather in {city} is {desc} and {temp} degrees with a high of {high} and a low of {low}.')
+    while(True):
+
+        c = command().lower()
+        print(c)
+        if "weather" in c:
+            city = c[-1]
+            print(c)
+            print(city)
+            # w = weather.Weather().getWeather(city)
+            # desc = w["desc"]
+            # temp = w["temp"]
+            # high = w["high"]
+            # low = w["low"]
+
+            # say(f'The current weather in {city} is {desc} and {temp} degrees with a high of {high} and a low of {low}.')
+
+
+listenForCommand()

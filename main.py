@@ -33,3 +33,17 @@ def listenForCommand() -> str:
             say("I'm sorry, I could not understand.")
         
         return command
+
+
+def greet():
+    pass
+
+
+city = "fullerton"
+w = weather.Weather().getWeather(city)
+desc = w["desc"]
+temp = w["temp"]
+high = w["high"]
+low = w["low"]
+
+print(f'The current weather in {city} is {desc} and {temp} degrees with a high of {high} and a low of {low}.')

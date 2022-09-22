@@ -17,7 +17,10 @@ def get_weather(city):
     #Checks the validity
     valid = invalid(response)
     if valid:
-        return response
+        info = []
+        info.append(response['name'])
+        info.append(response['main'])
+        return info
     else:
         return error
 
@@ -28,6 +31,4 @@ def invalid(response):
         return False
     
 
-x = input("What city? ")
-
-print(get_weather(x))
+print(get_weather(input('what city? ')))

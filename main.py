@@ -2,6 +2,8 @@ import pyttsx3
 import speech_recognition as sr
 import weather
 import greetings
+from datetime import datetime
+import time
 
 
 def say(audio: str) -> None:
@@ -10,7 +12,7 @@ def say(audio: str) -> None:
     voices = tts.getProperty('voices')
 
     tts.setProperty('voice', voices[1].id)
-    tts.setProperty('rate', 160)
+    tts.setProperty('rate', 175)
 
     tts.say(audio)
     tts.runAndWait()
@@ -63,10 +65,22 @@ def listenForCommand():
 
                 say(f'The current weather in {city} is {desc} and {temp} degrees with a high of {high} and a low of {low}.')
 
-            if "bye" in c:
+            elif "date" in c:
+                date = datetime.now().strftime('%A %B %d %Y')
+                say(f"The current date is {date}")
+
+            elif "time" in c:
+                t = time.strftime('%H:%M', time.localtime())
+                h = int(t.split(":")[0])
+                post = "p m" if (h >= 12) else "a m"
+                h = h%12
+                m = t.split(":")[1]
+                say(f'The current time is {h, m, post}')
+
+            elif "bye" in c:
                 say("goodbye")
                 break
 
-            
+
 if __name__ == '__main__':
     listenForCommand()

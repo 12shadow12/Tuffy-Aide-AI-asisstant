@@ -1,9 +1,11 @@
+#!/usr/bin/env python3
 import pyttsx3
 import speech_recognition as sr
 import weather
 import greetings
 from datetime import datetime
 import time
+#import jokes
 
 
 def say(audio: str) -> None:
@@ -36,21 +38,31 @@ def command() -> str:
         try:
             command = recognizer.recognize_google(audio, language='en')
         except:
-            say("I'm sorry, I could not understand.")
+            say("I'm sorry, I could not understand. How may I help you?")
             return None
         
         return command
 
 
-def greet():
+def greet() -> None:
     say(greetings.greet)
 
 
-def listenForCommand():
-    greet()
-    say("How can i help you?")
+def listen():
 
-    while(True):
+    c = command()
+    print(c)
+    if c:
+        c = c.lower()
+        if "tuffy" in c or "toffee" in c or "taffy" in c:
+            respondToCommand()
+
+
+def respondToCommand() -> None:
+    greet()
+    say("How can I help you?")
+
+    while True:
 
         c = command()
         if c:
@@ -64,6 +76,9 @@ def listenForCommand():
                 low = w["low"]
 
                 say(f'The current weather in {city} is {desc} and {temp} degrees with a high of {high} and a low of {low}.')
+
+            elif "joke" in c:
+                say(jokes.jokes)
 
             elif "date" in c:
                 date = datetime.now().strftime('%A %B %d %Y')
@@ -83,4 +98,5 @@ def listenForCommand():
 
 
 if __name__ == '__main__':
-    listenForCommand()
+    while True:
+        listen()

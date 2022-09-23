@@ -1,11 +1,10 @@
+#!/usr/bin/env python3
 import requests
 
 response = requests.get("https://www.greetingsapi.com/random")
-# json_data = response.json()
-# print(json_data)
 
-type = response.json()['type']
+t = response.json()['type']
 greeting = response.json()['greeting']
 language = response.json()['language']
 
-greet = greeting + '! That is ' + type + ' in ' + language
+greet = greeting + '! That is ' + t + ' in ' + language

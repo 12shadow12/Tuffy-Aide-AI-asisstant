@@ -3,12 +3,10 @@ import requests
 
 
 url = 'https://api.jokes.one/jod?category=knock-knock'
-api_token = "YOUR API KEY HERE"
-headers = {'content-type': 'application/json',
-	   'X-JokesOne-Api-Secret': format(api_token)}
+headers = {'content-type': 'application/json',}
 
 response = requests.get(url, headers=headers)
 #print(response)
 #print(response.text)
-jokes=response.json()['contents']['jokes'][0]
-print(jokes)
+joke=response.json()['contents']['jokes'][0]
+print((joke["joke"]["text"]).strip())

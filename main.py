@@ -6,6 +6,7 @@ import greetings
 from datetime import datetime
 import time
 import wikipedia
+import canvas
 #import jokes
 
 

@@ -2,11 +2,16 @@
 import requests
 
 
-url = 'https://api.jokes.one/jod?category=knock-knock'
-headers = {'content-type': 'application/json',}
+url = 'https://v2.jokeapi.dev/joke/'
+#headers = {'content-type': 'application/json',}
 
-response = requests.get(url, headers=headers)
-#print(response)
-#print(response.text)
-joke=response.json()['contents']['jokes'][0]
-print((joke["joke"]["text"]).strip())
+joke = []
+def getJoke(type='Any'):
+    response = requests.get(url + type).json()
+    if not response['error']:
+        if response['type'] == 'single':
+            joke.append('single')
+            joke.append(response['joke'])
+        elif response['type'] == 'twopart':
+            joke.append(response['setup'])
+            joke.append(response['delivery'])
